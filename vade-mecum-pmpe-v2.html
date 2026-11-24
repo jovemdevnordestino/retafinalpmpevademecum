@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="pt-BR" data-t="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vade Mecum PMPE</title>
+<style>
+:root{--bg:#f4f1ea;--sb:#ffffffd9;--fg:#1d1f24;--mut:#6b7280;--card:#fff;--bd:#e3ded2;--ac:#3b6fd4;--ac2:#7c4ddb;--c1:#ffe27a;--c2:#9bd7ff;--c3:#ffadad;--fs:18px;--sh:0 8px 28px #0000000f}
+[data-t=dark]{--bg:#0e1116;--sb:#161a22d9;--fg:#e8e6df;--mut:#98a2b3;--card:#171b23;--bd:#272d38;--ac:#7aa7ff;--ac2:#b794ff;--c1:#6d5b0e;--c2:#15527f;--c3:#7d2b2b;--sh:0 8px 28px #0007}
+*{box-sizing:border-box}body{margin:0;color:var(--fg);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:radial-gradient(900px 500px at 8% -8%,#7c4ddb26,transparent),radial-gradient(700px 400px at 100% 0,#3b6fd426,transparent),var(--bg);background-attachment:fixed}
+button,input,select,textarea{font:inherit;color:var(--fg);background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:7px 11px}
+button{cursor:pointer;transition:.15s}button:hover{border-color:var(--ac);transform:translateY(-1px)}button:disabled{opacity:.5}
+.pri{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;border:0}
+#app{display:none;grid-template-columns:272px 1fr;min-height:100vh}#app.nf{grid-template-columns:1fr}.nf aside{display:none}
+aside{position:sticky;top:0;height:100vh;overflow:auto;background:var(--sb);backdrop-filter:blur(16px);border-right:1px solid var(--bd);padding:16px 12px}
+.logo{font-weight:800;font-size:19px;background:linear-gradient(135deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}.logo small{display:block;font-size:11px;color:var(--mut);-webkit-text-fill-color:var(--mut);font-weight:500}
+#views{display:grid;gap:4px;margin:14px 0}.it,.vw{display:flex;justify-content:space-between;align-items:center;width:100%;text-align:left;border:0;background:transparent;padding:8px 10px;font-size:14px}
+.it span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.it i{font-style:normal;font-size:11px;color:var(--mut);background:var(--bg);border-radius:20px;padding:1px 8px}
+.on{background:linear-gradient(135deg,#3b6fd426,#7c4ddb26)!important;font-weight:600}
+.seg{display:flex;gap:4px;margin:6px 0}.seg button{flex:1;padding:5px}
+header{position:sticky;top:0;z-index:5;display:flex;gap:6px;flex-wrap:wrap;align-items:center;padding:10px 18px;background:var(--sb);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd)}
+#q{flex:1;min-width:180px;padding:9px 14px}#tagf{width:90px}#st{font-size:12px;color:var(--mut)}
+main{max-width:880px;width:100%;margin:0 auto;padding:18px}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:6px}.stat{flex:1;min-width:110px;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:10px 14px;box-shadow:var(--sh)}.stat b{display:block;font-size:22px}.stat span{font-size:12px;color:var(--mut)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:16px 22px;margin:14px 0;box-shadow:var(--sh)}
+.meta{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--mut);margin-bottom:8px}.chip{background:var(--bg);border-radius:20px;padding:2px 10px}.chip.h{color:#fff;background:linear-gradient(135deg,var(--ac),var(--ac2))}
+.b{font:var(--fs)/1.7 Georgia,'Source Serif Pro',serif;margin:.4em 0;text-align:justify;hyphens:auto}.inciso{margin-left:1.2em}.par{margin-left:.5em}.alinea{margin-left:2.4em}.b:first-of-type{font-weight:700}
+mark{color:inherit;border-radius:4px;padding:0 2px}.c1{background:var(--c1)}.c2{background:var(--c2)}.c3{background:var(--c3)}
+.row{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 4px}.row button{font-size:13px;padding:5px 10px}
+.nt,.tg,.ed,.fld{width:100%;margin-top:8px}details{font-size:13px;color:var(--mut)}
+#bar{position:fixed;display:none;z-index:20;background:#111c;backdrop-filter:blur(8px);padding:6px;border-radius:30px;gap:5px;box-shadow:0 8px 30px #0008}
+#bar button{border:0;width:36px;height:32px;border-radius:50%;padding:0;color:#000}
+.ov{position:fixed;inset:0;background:#000a;backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:30;padding:12px}
+.box{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:20px;width:min(620px,100%);max-height:92vh;overflow:auto}
+.box label{display:block;margin-top:8px;font-size:14px}.box input[type=number]{width:80px}
+#drop{border:2px dashed var(--bd);border-radius:14px;padding:22px;text-align:center;color:var(--mut);cursor:pointer}#drop.dg,#drop:hover{border-color:var(--ac);color:var(--fg)}
+#log{height:170px;overflow:auto;background:var(--bg);border-radius:10px;padding:8px;font:12px/1.4 ui-monospace,monospace;margin-top:8px;white-space:pre-wrap}
+progress{width:100%;height:10px;margin-top:10px;accent-color:var(--ac)}
+.big{font:22px/1.5 Georgia,serif;white-space:pre-wrap;padding:20px;background:var(--bg);border-radius:14px;margin:10px 0}
+.empty{text-align:center;color:var(--mut);padding:60px 10px}#pw{width:100%;margin-top:6px;padding:11px;font-size:16px;background:#fff;color:#222}
+#sen{height:1px}#mb{display:none}
+@media(max-width:820px){#app{grid-template-columns:1fr}aside{position:fixed;z-index:15;width:280px;transform:translateX(-100%);transition:.2s}.so aside{transform:none}#mb{display:inline-block}.nf aside{display:block}}
+</style></head><body>
+<div class="ov" id="lock" style="display:flex"><div class="box" style="width:min(380px,100%)"><div class="logo" style="font-size:24px">⚖ Vade Mecum<small>PMPE · Instituto AOCP</small></div><h3 id="lt" style="margin:14px 0 4px">Entrar</h3>
+<input id="pw" type="password" placeholder="Digite a senha" autocomplete="current-password" autofocus><label><input type="checkbox" id="sp"> Mostrar senha</label>
+<div class="row"><button id="lb" class="pri">Entrar</button></div><div id="lm" style="color:#e5534b"></div></div></div>
+
+<div id="app"><aside><div class="logo">⚖ Vade Mecum<small>PMPE · Instituto AOCP</small></div>
+<div id="views"><button class="vw on" data-v="all">📚 Todos os artigos</button><button class="vw" data-v="m">🖍 Marcados</button><button class="vw" data-v="n">📝 Anotados</button><button class="vw" data-v="e">✎ Editados</button><button class="vw" data-v="cards">🃏 Flashcards</button></div>
+<div class="seg"><button data-tab="law" class="on">Leis</button><button data-tab="dia">Dias do plano</button></div><div id="lst"></div></aside>
+<section><header><button id="mb">☰</button><input id="q" placeholder="🔍 Buscar: art. 129, prazo, palavra…  (Ctrl+K)"><input id="tagf" placeholder="#tag">
+<button id="bImp" class="pri">⬆ PDF</button><button id="bTh" title="Tema">◐</button><button id="bFm">A−</button><button id="bFp">A+</button><button id="bNf" title="Modo foco">⛶</button><button id="bBk" title="Backup">⇅</button><button id="bOut">Sair</button><span id="st"></span></header>
+<main id="main"></main></section></div>
+
+<div id="bar"><button data-c="1" style="background:var(--c1)" title="Prazo/número">⏱</button><button data-c="2" style="background:var(--c2)" title="Exceção/ressalva">⚠</button><button data-c="3" style="background:var(--c3)" title="Pegadinha AOCP">🎯</button><button data-c="0" style="background:#ddd" title="Remover marca">✕</button><button data-c="k" style="background:#fff" title="Criar flashcard">🃏</button></div>
+
+<div class="ov" id="imp"><div class="box"><h3 style="margin:0 0 8px">Importar Vade Mecum (PDF)</h3>
+<div id="drop">Arraste o PDF aqui ou clique para escolher<input type="file" id="pf" accept="application/pdf" hidden></div>
+<label>Páginas: <input type="number" id="p1" placeholder="auto"> a <input type="number" id="p2" placeholder="fim"> &nbsp; Margens a ignorar (pt): esq <input type="number" id="ml" value="45"> dir <input type="number" id="mr" value="90"></label>
+<label><input type="checkbox" id="two" checked> Texto em 2 colunas</label>
+<progress id="pg" value="0" max="1"></progress><div id="log"></div><div class="row"><button id="cx">Fechar</button></div></div></div>
+<div class="ov" id="fc"><div class="box"><h3 style="margin:0">Novo flashcard</h3><textarea class="fld" id="ff" rows="3" placeholder="Frente"></textarea><textarea class="fld" id="fb" rows="6" placeholder="Verso"></textarea>
+<div class="row"><button id="fs" class="pri">Salvar</button><button id="fx">Cancelar</button></div></div></div>
+
+<script>
+// ============ PARSER (testável fora do navegador) ============
+// BEGIN PARSER
+const unitType=l=>/^§|^Parágrafo único/i.test(l)?'par':/^[a-z]\)\s/.test(l)?'alinea':/^\d{1,2}\.\s/.test(l)?'par':/^[IVXLC]{1,7}\s*[-–—]\s|^[IVXLC]{1,7}\s+[a-zà-ú]/.test(l)?'inciso':null;
+function mkLines(items,W,o){const cols=[[],[]];
+ for(const it of items){if(!it.str.trim())continue;const x=it.transform[4],y=it.transform[5];if(y<45)continue;
+  if(o.toc){cols[0].push({s:it.str,x,y,w:it.width});continue}
+  if(x<o.L||x>W-o.R)continue;cols[o.two&&x>=W/2+5?1:0].push({s:it.str,x,y,w:it.width})}
+ const out=[];for(const c of cols){c.sort((a,b)=>b.y-a.y||a.x-b.x);let g=[],py=null;
+  const fl=()=>{if(!g.length)return;g.sort((a,b)=>a.x-b.x);let s='',pe=null;for(const i of g){if(pe!==null&&i.x-pe>1.2&&!/\s$/.test(s)&&!/^\s/.test(i.s))s+=' ';s+=i.s;pe=i.x+i.w}out.push(s.replace(/\s+/g,' ').trim());g=[]};
+  for(const i of c){if(py!==null&&Math.abs(i.y-py)>5)fl();g.push(i);py=i.y}fl()}return out}
+function mkParser(E){const P={law:'Geral',dia:'',raw:'',ls:['Geral'],i:0,prev:0,sec:'',secOpen:false,cur:null,out:[],seen:{}},byDia={};E.forEach(e=>byDia[e.dk]=e);
+ P.setDia=k=>{const e=byDia[k];if(!e)return;if(e.law!==P.raw){P.raw=e.law;P.ls=e.law.split(';').map(s=>s.trim());P.i=0;P.prev=0;P.cur=null;P.sec=''}P.law=P.ls[P.i];P.dia=e.dia};
+ P.feed=(l,pg)=>{l=l.replace(/\s+/g,' ').trim();let m;
+  if(!l||/Direitos Autorais|Licenciado para|cpf:|Leitura:\s*cerca|leitura|^[☐□\s]+$|^\d{1,3}$/i.test(l)||/^(DIREITOS? [A-ZÁÃÇÉÕ]+|LEGISLAÇÃO EXTRAVAGANTE|REVISÃO)(\s|$)/.test(l))return;
+  if(m=l.match(/^DIA\s*(\d{1,2})\b/)){P.setDia(String(+m[1]));return}
+  if(/^(T[ÍI]TULO|CAP[ÍI]TULO|SE[ÇC][ÃA]O|SUBSE[ÇC][ÃA]O)\b/i.test(l)&&l.length<60){P.sec=l;P.secOpen=true;return}
+  if(P.secOpen&&!/^(ART|§)/i.test(l)&&l===l.toUpperCase()&&l.length<90){P.sec+=' – '+l;P.secOpen=false;return}P.secOpen=false;
+  if(m=l.match(/^(?:Art\.?|ARTIGO|Artigo)\s*(\d+(?:\.\d+)?)\s*[º°o]?\s*(-\s?[A-Z])?(?=[\s.\-–,:]|$)/)){
+   const num=m[1]+(m[2]?m[2].replace(/\s/g,''):''),n=parseInt(m[1].replace('.',''));
+   if(P.ls.length>1&&n<P.prev&&P.i<P.ls.length-1){P.i++;P.law=P.ls[P.i];P.prev=0}P.prev=n;
+   const k=P.law+'|'+num,c=P.seen[k]=(P.seen[k]||0)+1;
+   P.cur={id:k+'|'+c,law:P.law,dia:P.dia,num,sec:P.sec,page:pg,blocks:[{t:'caput',x:l}]};P.out.push(P.cur);return}
+  if(!P.cur)return;const t=unitType(l),b=P.cur.blocks;
+  if(t)b.push({t,x:l});else{const x=b[b.length-1];x.x+=/\w-$/.test(x.x)?l:' '+l}};
+ return P}
+async function parsePdf(pdf,o,cb){const n=pdf.numPages,E=[];let dia='';
+ for(let p=1;p<=Math.min(5,n);p++){const pg=await pdf.getPage(p),tc=await pg.getTextContent();
+  for(const l of mkLines(tc.items,pg.getViewport({scale:1}).width,{toc:1})){const m=l.match(/^(.*?)\s*\.{5,}\s*(\d+)$/);if(!m)continue;
+   const d=m[1].match(/^DIA\s*(\d+)$/i);if(d){dia='Dia '+d[1];E.push({page:+m[2],dk:String(+d[1]),dia,law:''});continue}
+   const k=m[1].indexOf(':');if(k>0&&E.length)E[E.length-1].law=m[1].slice(k+1).trim()}}
+ const T=E.filter(e=>e.law);cb(0,1,`Sumário lido: ${T.length} dias com lei identificada.`);if(!T.length)cb(0,1,'⚠ Sumário não encontrado: os artigos ficarão em "Geral".');
+ const a=Math.max(1,o.a||(T[0]&&T[0].page)||1),z=Math.min(n,o.z||n),P=mkParser(T);
+ for(let p=a;p<=z;p++){const pg=await pdf.getPage(p),tc=await pg.getTextContent(),b=P.out.length;
+  mkLines(tc.items,pg.getViewport({scale:1}).width,o).forEach(l=>P.feed(l,p));pg.cleanup();cb(p-a+1,z-a+1,`p.${p}: +${P.out.length-b} artigos · ${P.dia} · ${P.law}`)}
+ return P.out}
+// END PARSER
+
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const norm=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+// ---------- armazenamento local ----------
+let db=null;const mem={};
+const idb=()=>new Promise(r=>{try{const q=indexedDB.open('vademecum',1);q.onupgradeneeded=()=>q.result.createObjectStore('kv');q.onsuccess=()=>r(q.result);q.onerror=()=>r(null)}catch(e){r(null)}});
+const lsGet=k=>{try{const v=localStorage.getItem('vm_'+k);return v===null?mem[k]:JSON.parse(v)}catch(e){return mem[k]}};
+const lsSet=(k,v)=>{mem[k]=v;try{localStorage.setItem('vm_'+k,JSON.stringify(v))}catch(e){}};
+const kvGet=k=>db?new Promise(r=>{const q=db.transaction('kv').objectStore('kv').get(k);q.onsuccess=()=>r(q.result);q.onerror=()=>r(undefined)}):Promise.resolve(lsGet(k));
+const kvSet=(k,v)=>db?new Promise(r=>{const t=db.transaction('kv','readwrite');t.objectStore('kv').put(v,k);t.oncomplete=r;t.onerror=r}):Promise.resolve(lsSet(k,v));
+let arts=[],U={marks:{},notes:{},tags:{},edits:{},cards:[]},cfg={theme:matchMedia('(prefers-color-scheme: light)').matches?'light':'dark',font:18,nf:false},F={law:'',dia:'',view:'all',tab:'law'},editing=null,shown=30,SEL=null,CUR=null,rev=false,timer,AH=null;
+const bc='BroadcastChannel'in window?new BroadcastChannel('vm'):null;
+const save=()=>{$('#st').textContent='salvando…';clearTimeout(timer);timer=setTimeout(async()=>{await kvSet('user',U);bc&&bc.postMessage(1);$('#st').textContent='salvo ✓'},350)};
+const saveCfg=()=>{kvSet('cfg',cfg);document.documentElement.dataset.t=cfg.theme;document.documentElement.style.setProperty('--fs',cfg.font+'px');$('#app').classList.toggle('nf',!!cfg.nf)};
+if(bc)bc.onmessage=async()=>{U=await kvGet('user')||U;if(!['TEXTAREA','INPUT'].includes(document.activeElement.tagName))render()};
+// ---------- autenticação local ----------
+async function hash(p){if(window.crypto&&crypto.subtle){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('vm::'+p));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+ let h1=0xdeadbeef,h2=0x41c6ce57;p='vm::'+p;for(let i=0;i<p.length;i++){const c=p.charCodeAt(i);h1=Math.imul(h1^c,2654435761);h2=Math.imul(h2^c,1597334677)}
+ h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);return'f'+(4294967296*(2097151&h2)+(h1>>>0)).toString(16)}
+const okGet=()=>{try{return sessionStorage.ok}catch(e){return window._ok}},okSet=v=>{try{v?sessionStorage.ok=1:sessionStorage.clear()}catch(e){window._ok=v}};
+async function go(){const p=$('#pw').value;if(!p){$('#lm').textContent='Digite a senha.';return}
+ try{const x=await hash(p);if(!AH){await kvSet('auth',x)}else if(x!==AH){$('#lm').textContent='Senha incorreta.';return}okSet(1);start()}catch(e){$('#lm').textContent='Erro: '+e.message}}
+async function boot(){$('#lb').onclick=go;$('#pw').onkeydown=e=>{if(e.key==='Enter')go()};$('#sp').onchange=e=>{$('#pw').type=e.target.checked?'text':'password'};$('#pw').focus();
+ try{db=await idb();cfg=Object.assign(cfg,await kvGet('cfg')||{});AH=await kvGet('auth')}catch(e){$('#lm').textContent='Aviso: armazenamento limitado ('+e.message+')'}
+ if(!AH){$('#lt').textContent='Crie uma senha de acesso';$('#lb').textContent='Criar'}if(okGet()&&AH)start()}
+async function start(){$('#lock').style.display='none';$('#app').style.display='grid';saveCfg();
+ arts=await kvGet('arts')||[];U=Object.assign(U,await kvGet('user')||{});side();render()}
+// ---------- importação ----------
+const CDN='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
+const loadScript=u=>new Promise((ok,no)=>{const s=document.createElement('script');s.src=u;s.onload=ok;s.onerror=no;document.head.appendChild(s)});
+const log=m=>{const l=$('#log');l.textContent+=m+'\n';l.scrollTop=l.scrollHeight};
+function report(){const g={};arts.forEach(a=>(g[a.law]=g[a.law]||[]).push(a));
+ return Object.entries(g).map(([l,v])=>{const ns=[...new Set(v.map(a=>parseInt(a.num)))].sort((x,y)=>x-y),S=new Set(ns),miss=[];
+  for(let i=ns[0];i<ns[ns.length-1];i++)if(!S.has(i))miss.push(i);
+  return `• ${l}: ${v.length} arts (${ns[0]}–${ns[ns.length-1]})${miss.length?' · lacunas: '+miss.slice(0,10).join(', ')+(miss.length>10?'…':''):' · contínuo'}`}).join('\n')}
+async function importPdf(f){if(!f)return;if(arts.length&&!confirm('Substituir os artigos já importados? Suas marcações e notas são mantidas.'))return;
+ $('#log').textContent='';try{log('Carregando leitor de PDF…');await loadScript(CDN+'pdf.min.js');
+  const wt=await(await fetch(CDN+'pdf.worker.min.js')).text();pdfjsLib.GlobalWorkerOptions.workerSrc=URL.createObjectURL(new Blob([wt],{type:'text/javascript'}));
+  const pdf=await pdfjsLib.getDocument({data:new Uint8Array(await f.arrayBuffer())}).promise;log(`PDF com ${pdf.numPages} páginas.`);
+  const o={L:+$('#ml').value,R:+$('#mr').value,two:$('#two').checked,a:+$('#p1').value||0,z:+$('#p2').value||0};
+  arts=await parsePdf(pdf,o,(i,t,m)=>{$('#pg').max=t;$('#pg').value=i;log(m);await0()});
+  await kvSet('arts',arts);side();render();log(`\n✔ ${arts.length} artigos importados.\n`+report()+'\n\n(Lacunas podem ser normais: o plano de estudos cobre só trechos de algumas leis.)')
+ }catch(e){log('Erro: '+e.message+' — o importador precisa de internet para baixar o pdf.js.')}}
+const await0=()=>{};
+$('#drop').onclick=()=>$('#pf').click();$('#pf').onchange=e=>importPdf(e.target.files[0]);
+$('#drop').ondragover=e=>{e.preventDefault();$('#drop').classList.add('dg')};$('#drop').ondragleave=()=>$('#drop').classList.remove('dg');
+$('#drop').ondrop=e=>{e.preventDefault();$('#drop').classList.remove('dg');importPdf(e.dataTransfer.files[0])};
+// ---------- leitor ----------
+const blocksOf=a=>U.edits[a.id]||a.blocks,label=a=>`${a.law} · Art. ${a.num}`;
+function hl(t,ms){ms=ms.slice().sort((a,b)=>a.s-b.s);let o='',p=0;for(const m of ms){o+=esc(t.slice(p,m.s))+`<mark class="c${m.c}">${esc(t.slice(m.s,m.e))}</mark>`;p=m.e}return o+esc(t.slice(p))}
+function side(){const k=F.tab,g=new Map();arts.forEach(a=>g.set(a[k],(g.get(a[k])||0)+1));
+ $('#lst').innerHTML=[...g].map(([n,c])=>`<button class="it ${F[k]===n?'on':''}" data-k="${k}" data-n="${esc(n)}"><span>${esc(n)}</span><i>${c}</i></button>`).join('')||'<small style="color:var(--mut)">Importe o PDF para começar</small>';
+ $$('.seg button').forEach(b=>b.classList.toggle('on',b.dataset.tab===k));$$('.vw').forEach(b=>b.classList.toggle('on',b.dataset.v===F.view))}
+$('#lst').onclick=e=>{const b=e.target.closest('.it');if(!b)return;const k=b.dataset.k,v=F[k]===b.dataset.n?'':b.dataset.n;F.law=F.dia='';F[k]=v;if(F.view==='cards')F.view='all';shown=30;side();render();scrollTo(0,0);document.body.classList.remove('so');$('#app').classList.remove('so')};
+$('.seg').onclick=e=>{if(e.target.dataset.tab){F.tab=e.target.dataset.tab;side()}};
+$('#views').onclick=e=>{const v=e.target.closest('.vw');if(!v)return;F.view=v.dataset.v;shown=30;side();render()};
+function filtered(){const q=norm($('#q').value.trim()),tg=norm($('#tagf').value.replace('#','').trim()),mm=q.match(/^(?:art\.?\s*|artigo\s*)?(\d+(?:-[a-z])?)\s*[º°]?$/);
+ return arts.filter(a=>{if(F.law&&a.law!==F.law)return;if(F.dia&&a.dia!==F.dia)return;const v=F.view;
+  if(v==='m'&&!(U.marks[a.id]||[]).length)return;if(v==='n'&&!(U.notes[a.id]||'').trim())return;if(v==='e'&&!U.edits[a.id])return;
+  if(tg&&!(U.tags[a.id]||[]).some(t=>norm(t).includes(tg)))return;if(!q)return true;if(mm)return norm(a.num)===mm[1];
+  const t=a._n||(a._n=norm(a.blocks.map(b=>b.x).join(' ')+' '+a.law));return q.split(/\s+/).every(w=>t.includes(w)||norm(blocksOf(a).map(b=>b.x).join(' ')+(U.notes[a.id]||'')).includes(w))})}
+function card(a){const bl=blocksOf(a),ed=!!U.edits[a.id],ms=U.marks[a.id]||[];
+ return `<article class="card" data-a="${esc(a.id)}"><div class="meta"><span class="chip h">${esc(a.law)}</span><span class="chip">Art. ${esc(a.num)}</span><span class="chip">${esc(a.dia||'')} · p.${a.page}</span>${a.sec?`<span class="chip">${esc(a.sec)}</span>`:''}${ed?'<span class="chip">editado</span>':''}</div>`+
+ (editing===a.id?`<textarea class="ed" rows="10">${esc(bl.map(b=>b.x).join('\n'))}</textarea><div class="row"><button data-act="saveEd" class="pri">Salvar edição</button><button data-act="cancel">Cancelar</button></div>`
+  :bl.map((b,i)=>`<p class="b ${b.t}" data-i="${i}">${hl(b.x,ms.filter(m=>m.b===i))}</p>`).join(''))+
+ `<div class="row"><button data-act="edit">✎ Editar</button>${ed?'<button data-act="orig">↺ Original</button>':''}<button data-act="card">🃏 Card</button></div>`+
+ (ed?`<details><summary>Texto original</summary>${a.blocks.map(b=>`<p class="b ${b.t}">${esc(b.x)}</p>`).join('')}</details>`:'')+
+ `<input class="tg" placeholder="#tags separadas por vírgula" value="${esc((U.tags[a.id]||[]).join(', '))}"><textarea class="nt" rows="2" placeholder="Anotações pessoais…">${esc(U.notes[a.id]||'')}</textarea></article>`}
+function render(){const m=$('#main');if(F.view==='cards')return renderCards();
+ if(!arts.length){m.innerHTML='<div class="empty"><div style="font-size:48px">📖</div><h3>Nenhum artigo ainda</h3>Clique em <b>⬆ PDF</b> para importar o seu Vade Mecum.</div>';return}
+ const r=filtered(),mk=Object.values(U.marks).reduce((s,v)=>s+v.length,0),due=U.cards.filter(c=>c.due<=Date.now()).length;
+ m.innerHTML=`<div class="stats"><div class="stat"><b>${arts.length}</b><span>artigos</span></div><div class="stat"><b>${mk}</b><span>marcações</span></div><div class="stat"><b>${Object.values(U.notes).filter(x=>x.trim()).length}</b><span>anotações</span></div><div class="stat"><b>${U.cards.length}</b><span>cards (${due} p/ revisar)</span></div></div><div class="meta">${r.length} resultado(s)${F.law?' · '+esc(F.law):''}${F.dia?' · '+esc(F.dia):''}</div>`+
+  r.slice(0,shown).map(card).join('')+(r.length>shown?'<div id="sen"></div>':'')+(r.length?'':'<div class="empty">Nada encontrado.</div>');
+ const s=$('#sen');if(s)new IntersectionObserver((en,ob)=>{if(en[0].isIntersecting){ob.disconnect();shown+=30;render()}},{rootMargin:'600px'}).observe(s)}
+['#q','#tagf'].forEach(s=>$(s).oninput=()=>{shown=30;if(F.view==='cards')F.view='all',side();render()});
+$('#main').addEventListener('click',e=>{const act=e.target.dataset.act,c=e.target.closest('.card');if(!act||!c)return;const id=c.dataset.a,a=arts.find(x=>x.id===id);
+ if(act==='edit'){editing=id;render()}else if(act==='cancel'){editing=null;render()}
+ else if(act==='saveEd'){const ls=c.querySelector('.ed').value.split('\n').map(s=>s.trim()).filter(Boolean);
+  if((U.marks[id]||[]).length&&!confirm('Editar o texto apaga as marcações deste artigo. Continuar?'))return;
+  U.edits[id]=ls.map((x,i)=>({t:i?unitType(x)||'par':'caput',x}));delete U.marks[id];editing=null;save();render()}
+ else if(act==='orig'){if(confirm('Descartar sua edição e voltar ao texto original?')){delete U.edits[id];delete U.marks[id];save();render()}}
+ else if(act==='card')openCard(`${label(a)} — `,blocksOf(a).map(b=>b.x).join('\n'),id)});
+$('#main').addEventListener('input',e=>{const c=e.target.closest('.card');if(!c)return;const id=c.dataset.a;
+ if(e.target.classList.contains('nt'))U.notes[id]=e.target.value;if(e.target.classList.contains('tg'))U.tags[id]=e.target.value.replace(/#/g,'').split(',').map(s=>s.trim()).filter(Boolean);save()});
+// marcação por seleção
+function checkSel(){const s=getSelection(),bar=$('#bar');if(!s.rangeCount||s.isCollapsed){bar.style.display='none';return}
+ const r=s.getRangeAt(0),up=n=>(n.nodeType===3?n.parentElement:n).closest('.b[data-i]'),el=up(r.startContainer),e2=up(r.endContainer);
+ if(!el||el!==e2){bar.style.display='none';return}
+ const pre=document.createRange();pre.selectNodeContents(el);pre.setEnd(r.startContainer,r.startOffset);const st=pre.toString().length;
+ SEL={a:el.closest('.card').dataset.a,i:+el.dataset.i,s:st,e:st+r.toString().length,text:r.toString()};
+ const b=r.getBoundingClientRect();bar.style.display='flex';bar.style.top=Math.max(64,b.top-50)+'px';bar.style.left=Math.min(innerWidth-230,Math.max(4,b.left))+'px'}
+['mouseup','touchend','keyup'].forEach(ev=>document.addEventListener(ev,()=>setTimeout(checkSel,15)));
+$('#bar').addEventListener('mousedown',e=>e.preventDefault());
+$('#bar').addEventListener('click',e=>{const c=e.target.dataset.c;if(c===undefined||!SEL)return;const a=arts.find(x=>x.id===SEL.a);
+ if(c==='k'){openCard(`${label(a)} — `,SEL.text,a.id);return}
+ const arr=(U.marks[a.id]||[]).filter(m=>!(m.b===SEL.i&&m.s<SEL.e&&m.e>SEL.s));if(c!=='0')arr.push({b:SEL.i,s:SEL.s,e:SEL.e,c:+c});
+ U.marks[a.id]=arr;save();getSelection().removeAllRanges();$('#bar').style.display='none';render()});
+// ---------- flashcards ----------
+function openCard(f,b,id){CUR=id;$('#ff').value=f;$('#fb').value=b;$('#fc').style.display='flex'}
+$('#fx').onclick=()=>$('#fc').style.display='none';
+$('#fs').onclick=()=>{U.cards.push({id:Date.now(),art:CUR,front:$('#ff').value,back:$('#fb').value,box:0,due:0});save();$('#fc').style.display='none';getSelection().removeAllRanges();$('#bar').style.display='none';render()};
+const IV=[0,1,3,7,16,35];
+function renderCards(){const now=Date.now(),due=U.cards.filter(c=>c.due<=now);
+ let h=`<div class="stats"><div class="stat"><b>${U.cards.length}</b><span>cards</span></div><div class="stat"><b>${due.length}</b><span>para revisar</span></div></div>`;
+ if(due.length){const c=due[0];h+=`<div class="card"><div class="meta"><span class="chip">caixa ${c.box}</span> Espaço = mostrar · 1 errei · 2 acertei</div><div class="big">${esc(c.front)}</div>`+(rev?`<div class="big" style="border:1px solid var(--ac)">${esc(c.back)}</div><div class="row"><button data-r="0">✗ Errei (1)</button><button data-r="1" class="pri">✓ Acertei (2)</button></div>`:'<div class="row"><button data-r="s" class="pri">Mostrar resposta</button></div>')+'</div>'}
+ else h+='<div class="empty"><div style="font-size:48px">🎉</div>Nenhum card para revisar agora.</div>';
+ h+='<h4>Todos os cards</h4>'+U.cards.map(c=>{const a=arts.find(x=>x.id===c.art);return `<div class="card"><div class="meta">${a?esc(label(a)):''} · caixa ${c.box}</div><b>${esc(c.front)}</b><div style="white-space:pre-wrap">${esc(c.back)}</div><div class="row"><button data-d="${c.id}">Excluir</button></div></div>`}).join('');$('#main').innerHTML=h}
+function grade(r){if(r==='s'){rev=true;return renderCards()}const c=U.cards.filter(c=>c.due<=Date.now())[0];if(!c||!rev)return;c.box=r==='1'?Math.min(c.box+1,5):0;c.due=Date.now()+IV[c.box]*864e5;rev=false;save();renderCards()}
+$('#main').addEventListener('click',e=>{if(F.view!=='cards')return;const r=e.target.dataset.r,d=e.target.dataset.d;
+ if(d&&confirm('Excluir card?')){U.cards=U.cards.filter(c=>c.id!=d);save();renderCards()}if(r!==undefined)grade(r)});
+// ---------- atalhos e barra superior ----------
+document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();$('#q').focus();$('#q').select()}
+ if(e.key==='Escape'){['imp','fc'].forEach(i=>$('#'+i).style.display='none');$('#q').blur()}
+ if(F.view==='cards'&&!['TEXTAREA','INPUT'].includes(document.activeElement.tagName)){if(e.key===' '){e.preventDefault();grade('s')}if(e.key==='1'||e.key==='2')grade(String(e.key-1))}});
+$('#bImp').onclick=()=>$('#imp').style.display='flex';$('#cx').onclick=()=>$('#imp').style.display='none';
+$('#bTh').onclick=()=>{cfg.theme=cfg.theme==='dark'?'light':'dark';saveCfg()};
+$('#bFm').onclick=()=>{cfg.font=Math.max(13,cfg.font-1);saveCfg()};$('#bFp').onclick=()=>{cfg.font=Math.min(34,cfg.font+1);saveCfg()};
+$('#bNf').onclick=()=>{cfg.nf=!cfg.nf;saveCfg()};$('#mb').onclick=()=>$('#app').classList.toggle('so');
+$('#bOut').onclick=()=>{okSet(0);location.reload()};
+$('#bBk').onclick=()=>{if(confirm('OK = exportar backup (JSON). Cancelar = restaurar de um arquivo.')){
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({arts,U})],{type:'application/json'}));a.download='vademecum-backup.json';a.click()}
+ else{const i=document.createElement('input');i.type='file';i.accept='.json';i.onchange=async()=>{try{const d=JSON.parse(await i.files[0].text());
+  arts=d.arts||[];U=Object.assign({marks:{},notes:{},tags:{},edits:{},cards:[]},d.U);await kvSet('arts',arts);await kvSet('user',U);side();render()}catch(e){alert('Arquivo inválido')}};i.click()}};
+boot();
+</script></body></html>
